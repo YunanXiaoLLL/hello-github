@@ -3,77 +3,34 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
-public class battlePic implements ActionListener{
-//让frame自己去addMouseListener,而不是利用actionPerformed.降低耦合
-	//似乎必须把frame传给startMouse???
-	int[] a = new int[6];
-	protected JFrame frame;
-	public battlePic(JFrame frame){
-		this.frame=frame;
-	//	btn0.addActionListener(gg);
-	//	btn2.addActionListener(gg);
-	//	btn3.addActionListener(gg);
-	//	btn4.addActionListener(gg);
-	//	btn5.addActionListener(gg);
-	}
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		if(a[1]== 1){
-			a[1]=0;
-//			frame.removeMouseListener(l);
-		}
-		else{
-			a[1]++;
-		}
-		for( int j=0;j<a.length;j++){
-			if(j==1){
-				j++;
-			}
-			a[j]=0;
-		}
-		
-//		a[1]++;
-		if(a[1]==1){
-			StartMouse okmouse = new StartMouse(frame , "Line");
-			frame.addMouseListener(okmouse);
-			frame.addMouseMotionListener(okmouse);	
-		}	
-//		else{
-//			a[1]
-//		}
-	}
+public class battlePic {
+	//截至目前，我已经可以产生一条直线，并且移动它了。
 	
+	//现在我想实现数据与表现分离，数据是鼠标坐标，表现是M继承JPanel
+	//让View得到mouselistener的数据去paint,update等等，View只管接收数据去画，mouse只管提供数据，可以做？
+	//为了得到鼠标数据,在Main函数中去new一个鼠标对象出来，让它去getX,Y??或者在View中new一个鼠标对象？
+	//修改StartMouse?让它有一个Shape数组，存储画出来的对象。让Shape类有一个isSelected方法知道被选中？
+	//extends JPanel干嘛？
+	//每画完一次都要重新按按钮？以便于对画出来的对象进行选中操作？
+	//用到ereaser时相当于给对象颜色变成背景色，就看不到了嘛。
+//	int[] a = new int[6];
+//	public battlePic(M m){
+//		
+//	
+//	}
+
 	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		Container contentPane = frame.getContentPane();
-		JPanel paintPic = new JPanel(new GridLayout(6,1));
-		 JButton btn0 = new JButton("thick");
-		 JButton btn1 = new JButton("line");
-		 JButton btn2 = new JButton("circle");
-		 JButton btn3 = new JButton("triangle");
-		 JButton btn4 = new JButton("rectangle");
-		 JButton btn5 = new JButton("eraser");
-		 
-		 paintPic.add(btn0);
-		 paintPic.add(btn1);
-		 paintPic.add(btn2);
-		 paintPic.add(btn3);
-		 paintPic.add(btn4);
-		 paintPic.add(btn5);
-		 paintPic.setPreferredSize( new Dimension(100,400));
-		 
-		 contentPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			contentPane.add(paintPic);
-			frame.setSize( new Dimension(700,600));
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setResizable(false);
-			frame.setTitle("frameS");
-			frame.setVisible(true);
-			
-		 
-		battlePic btP =new battlePic(frame);
-		btn1.addActionListener( btP );
 		
+		JFrame frame = new JFrame();
+		M panel = new M();
+		Container contentPane = frame.getContentPane();
+		contentPane.setLayout(new BorderLayout());
+		contentPane.add(panel);
+		frame.setSize( new Dimension(700,600));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		frame.setTitle("frameS");
+		frame.setVisible(true);
 		
 		
 	
