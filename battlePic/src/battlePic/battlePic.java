@@ -32,7 +32,6 @@ public class battlePic {
 		frame.setTitle("frameS");
 		frame.setVisible(true);
 		
-		
 	
 	}
 
